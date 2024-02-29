@@ -15,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   List<dynamic> characters = [];
   Map<String, dynamic> info = {};
   var url = 'https://rickandmortyapi.com/api/character';
+  int currentPage = 1;
 
   void getData() async {
     try {
@@ -35,12 +36,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   void navigatePrevPage() {
-    url = info['prev'];
+    setState(() {
+      currentPage--;
+    });
+    url = '$url&page=$currentPage';
     getData();
   }
 
   void navigateNextPage() {
-    url = info['next'];
+    setState(() {
+      currentPage++;
+    });
+    url = '$url&page=$currentPage';
     getData();
   }
 
@@ -57,9 +64,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).primaryColor,
         title: Row(
           children: [
-            Text('count: ${info['count'].toString()}'),
-            const SizedBox(width: 10),
-            Text('page: ${info['pages'].toString()}'),
+            Text('page: $currentPage'),
           ],
         ),
         actions: [
