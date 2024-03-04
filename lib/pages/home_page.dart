@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<dynamic> characters = [];
   Map<String, dynamic> info = {};
-  var url = 'https://rickandmortyapi.com/api/character';
+  var url = 'https://rickandmortyapi.com/api/character/';
   int currentPage = 1;
 
   void getData() async {
@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       currentPage--;
     });
-    url = '$url&page=$currentPage';
+    url = '$url?page=$currentPage';
     getData();
   }
 
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       currentPage++;
     });
-    url = '$url&page=$currentPage';
+    url = '$url?page=$currentPage';
     getData();
   }
 
